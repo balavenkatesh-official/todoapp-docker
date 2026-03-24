@@ -44,12 +44,18 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          az acr login --name simpleregistry
           az container delete --name todoapp --resource-group Devops-RG --yes || true
+
+          USERNAME=$(az acr credential show --name simpleregistry --query "username" -o tsv)
+          PASSWORD=$(az acr credential show --name simpleregistry --query "passwords[0].value" -o tsv)
+
           az container create \
             --name todoapp \
             --resource-group Devops-RG \
             --image $(containerRegistry)/$(imageRepository):$(tag) \
+            --registry-login-server $(containerRegistry) \
+            --registry-username $USERNAME \
+            --registry-password $PASSWORD \
             --dns-name-label aci-demo-bala \
             --ports 80 \
             --os-type Linux
