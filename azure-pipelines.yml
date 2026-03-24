@@ -37,3 +37,19 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure subscription 1 (281d6df1-9dfc-46bb-a0e9-46971c2d4d33)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az container create \
+          --name todoapp \
+          --resource-group Devops-RG \
+          --image $(containerRegistry)/$(imageRepository):$(tag) \
+          --registry-login-server $(containerRegistry) \
+          --registry-username simpleregistry  \
+          --registry-password 4W1JNIhVrYIgk4BrvlXkLb3DjrFz85erWrv4iVd4H9iKtO06JWEqJQQJ99CCACBsN54Eqg7NAAACAZCR2beC \
+          --dns-name-label aci-demo-bala
+    
