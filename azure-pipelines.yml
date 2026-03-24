@@ -58,5 +58,7 @@ stages:
             --registry-password $PASSWORD \
             --dns-name-label aci-demo-bala \
             --ports 80 \
-            --os-type Linux
+            --os-type Linux \
+            --cpu 1 \
+            --memory 1.5
     
