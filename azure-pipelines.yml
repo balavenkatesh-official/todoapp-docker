@@ -52,4 +52,5 @@ stages:
           --registry-username simpleregistry  \
           --registry-password 4W1JNIhVrYIgk4BrvlXkLb3DjrFz85erWrv4iVd4H9iKtO06JWEqJQQJ99CCACBsN54Eqg7NAAACAZCR2beC \
           --dns-name-label aci-demo-bala
+          --os-type Linux
     
